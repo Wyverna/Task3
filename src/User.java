@@ -19,7 +19,7 @@ public class User {
 				}
 				System.out.println("0 - exit");
 				move= new Scanner(System.in).nextInt();
-			} while(move<=0 && move>=(moves.length-1));
+			} while(move<=0 || move>=(moves.length-1));
 			move=move-1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
