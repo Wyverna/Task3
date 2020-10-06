@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Itransition:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Itransition_jar</output-path>
+    <root id="archive" name="Itransition.jar">
+      <element id="module-output" name="Itransition" />
+    </root>
+  </artifact>
+</component>
