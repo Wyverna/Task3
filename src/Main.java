@@ -7,43 +7,29 @@ public class Main {
 	{
 		if(args.length % 2 == 0 || args.length <=1)
 		{
-			Exception e= new Exception("Wrong number parameters");
-			throw e;
+			throw new Exception("Wrong number parameters");
 		}
 	}
 	public static void checkUnique(String[] args) throws Exception
 	{
-
 		Map<String, Integer> map = new HashMap<>();
-			for (String arg : args)
-			{
-				if (!map.containsKey(arg))
-				{
-					map.put(arg, 1);
-				}
-				else
-				{
-					map.put(arg, map.get(arg) + 1);
-				}
-			}
-		List<String> duplicates = map.entrySet().stream()
-				.filter(e -> e.getValue() > 1)
-				.map(e -> e.getKey())
-				.collect(Collectors.toList());
-		if(duplicates.size()>0)
+		for (String arg : args)
 		{
-			Exception ex = new Exception("Params don't unique");
-			throw ex;
+			if (!map.containsKey(arg)) map.put(arg, 1);
+			else map.put(arg, map.get(arg) + 1);
 		}
+		List<String> duplicates = map.entrySet().stream().filter(e -> e.getValue() > 1)
+                .map(e -> e.getKey()).collect(Collectors.toList());
+		if(duplicates.size()>0) throw new Exception("Params don't unique");
 	}
 	public static String ByteToHex(byte[] result)
 	{
 
-		StringBuilder sb = new StringBuilder();
+		StringBuilder s = new StringBuilder();
 		for (byte b : result) {
-			sb.append(String.format("%02x", b));
+			s.append(String.format("%02x", b));
 		}
-		return sb.toString();
+		return s.toString();
 	}
     public static void main(String[] args) {
 		try {

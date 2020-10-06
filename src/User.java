@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class User {
     public int move;
-	String[] movs;
-	public User(String[] args)
+	String[] moves;
+	public User(String[] moves)
 	{
-		movs=args;
+		this.moves=moves;
 	}
     public void getMove() {
         try {
@@ -14,12 +14,12 @@ public class User {
 				if(move!=0)
 					System.out.println("Invalid move");
 				System.out.println("Available moves");
-				for (int i = 0; i < movs.length; i++) {
-					System.out.println(i + 1 + "-" + movs[i]);
+				for (int i = 0; i < moves.length; i++) {
+					System.out.println(i + 1 + "-" + moves[i]);
 				}
 				System.out.println("0 - exit");
 				move= new Scanner(System.in).nextInt();
-			} while(move<=0 && move>=movs.length);
+			} while(move<=0 && move>=moves.length-1);
 			move=move-1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -27,19 +27,19 @@ public class User {
     }
 	public void equals(Computer computer)
 	{
-		System.out.println("Your move: "+movs[move]);
-		System.out.println("Computer move: "+movs[computer.move]);
-		int p = (movs.length-1)/2;
+		System.out.println("Your move: "+moves[move]);
+		System.out.println("Computer move: "+moves[computer.move]);
+		int p = (moves.length-1)/2;
 		for(int f=1;f<=p;f++) {
-			if (computer.move == (move+f)%movs.length) {
-				System.out.println("You win");
+			if (computer.move == (move+f)%moves.length) {
+				System.out.println("You lose");
 				return;
 			}
 		}
 		if(computer.move==move)
 			System.out.println("Draw");
 		else
-			System.out.println("You lose");
+			System.out.println("You win");
 	}
 }
 

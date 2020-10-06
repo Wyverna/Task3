@@ -3,40 +3,36 @@ import java.nio.ByteBuffer;
 import java.security.SecureRandom;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-
-import static java.nio.charset.StandardCharsets.US_ASCII;
-
 public class Computer {
     public int move;
 	public byte[] key;
-	public String[] movs;
+	public String[] moves;
 	private byte[] digest(byte[] input) {
-        MessageDigest md;
+        MessageDigest messageDigest;
         try {
-            md = MessageDigest.getInstance("SHA3-256");
+            messageDigest = MessageDigest.getInstance("SHA3-256");
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalArgumentException(e);
         }
-        byte[] result = md.digest(input);
+        byte[] result = messageDigest.digest(input);
         return result;
     }
 	
-	public Computer(String[] args)
+	public Computer(String[] moves)
 	{
 		SecureRandom random = new SecureRandom();
 		key=new byte[32];
-		movs = args;
+		this.moves = moves;
 		random.nextBytes(key);
 	}
 	
     public void getMove()
     {
-      move =  ThreadLocalRandom.current().nextInt(0, movs.length);
-      byte[] msg = ByteBuffer.allocate(movs[move].getBytes(US_ASCII).length+key.length).put(movs[move].getBytes(US_ASCII))
+      move =  ThreadLocalRandom.current().nextInt(0, moves.length);
+      byte[] message = ByteBuffer.allocate(moves[move].getBytes().length+key.length).put(moves[move].getBytes())
               .put(key).array();
-	  byte[] result = digest(msg);
+	  byte[] result = digest(message);
       System.out.println("HMAC "+Main.ByteToHex(result));
     }
 }
